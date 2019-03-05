@@ -10,8 +10,14 @@ source venv/bin/activate
 pip install -r requirements.txt
 ```
 
+To run tests execute
+```
+tests/test.py
+
+```
+
 Further commands to be added below for testing, building Docker image and releasing image to Docker
 ```
 
-``̀
 
+```
