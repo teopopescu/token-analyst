@@ -5,7 +5,7 @@ import json
 import logging
 import time
 
-class pricePipeline():
+class price_pipeline():
 
     #function used for setting the max timestamp for each coin
     def timestamp_max_switcher(x):
