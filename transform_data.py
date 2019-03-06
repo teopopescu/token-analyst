@@ -39,13 +39,20 @@ class transform_data():
             return avro.schema.Parse(schema.read())
 
     @staticmethod
-    def serialize_records(records, avro_output="ZRX.avro"):
+    def serialize_records(records,coin,avro_output=None):
+        if avro_output==None:
+            avro_output=str(coin) + ".avro"
         transformer = transform_data()
         schema = transformer.parse_schema()
+        #avro_output=str(coin) + ".avro"
         with open(avro_output, 'wb') as out:
             writer = DataFileWriter(out, DatumWriter(), schema)
             for record in records:
                 writer.append(record)
 
-    #serialize_records(read_price_data('ZRX.csv'))
+    @staticmethod
+    def load_data():
+        s3 = boto3.resource('s3')
+        bucket_name = 'test-erc20-ta'
+        s3.meta.client.upload_file('ZRX.avro', bucket_name, 'zrx/zrx.avro')
 

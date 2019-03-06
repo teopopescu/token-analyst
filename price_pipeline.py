@@ -9,6 +9,7 @@ import time
 class price_pipeline():
 
     #function used for setting the max timestamp for each coin
+    '''
     def timestamp_max_switcher(x):
         return {
         'BTC': 1546300800,  #1280016000, #15-07-2010
@@ -24,7 +25,23 @@ class price_pipeline():
         'BNB': 1501027200, #26-07-2017
         'ZRX': 1502928000 #17-08-2017
     }.get(x,'No such coin')
-    
+    '''
+    @staticmethod
+    def timestamp_max_switcher(x):
+        return {
+            'BTC': 1546304461,  # 1280016000, #15-07-2010
+            'ETH': 1546304461,  # 31-07-2011
+            'LTC': 1546304461,  # 14-10-2011
+            'BCH': 1546304461,  # 2-08-2017
+            'ETC': 1546304461,  # 31-07-2011
+            'ZEC': 1546304461,  # 29-10-2016
+            'MKR': 1546304461,  # 01-09-2015
+            'DAI': 1546304461,  # 01-06-2016
+            'REP': 1546304461,  # 28-10-2015
+            'BAT': 1546304461,  # 03-06-2017
+            'BNB': 1546304461,  # 26-07-2017
+            'ZRX': 1546304461  # 17-08-2017
+        }.get(x, 'No such coin')
     logging.basicConfig(filename='data_extraction.log',level=logging.DEBUG)
     
     #function to extract historical data for coin
@@ -63,7 +80,7 @@ class price_pipeline():
             price_data = price_data.sort_values(by='time',ascending='True')
             earliest_timestamp = price_data[price_data['pair'] == str(coin) + '/USD'].sort_values(by='time')['time'].reset_index(drop=True)[0]
         price_data.to_csv(coin + '.csv',index=False )
-        return price_data
+        return coin + '.csv'
 
 
 
