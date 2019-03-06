@@ -8,6 +8,17 @@ file_path = "zrx_test_2.csv"
 fields = ("close", "high", "low", "open", "time", "volumefrom", "volumeto", "pair")
 priceStreamRecord = namedtuple('record', fields)
 
+def parse_price_data(row):
+    return {
+        "close": float(row[0]), 
+        "high": float(row[1]), 
+        "low": float(row[2]), 
+        "open": float(row[3]), 
+        "time": int(row[4]), 
+        "volumefrom": float(row[5]), 
+        "volumeto": float(row[6]), 
+        "pair": str(row[7])
+    }
 
 def read_forecast_data(path):
     with open(path, 'rU') as data:
@@ -15,14 +26,7 @@ def read_forecast_data(path):
         reader = csv.reader(data, delimiter = ",")
         list_of_rows=[]
         for row in reader:
-            row[4] = int(row[4])
-            row[7] = str(row[7])
-            for i in [0,1,2,3,5,6]:
-                row[i]=float(row[i])
-            #list_of_rows.append(row)
-    #return list_of_rows
-        for row in map(priceStreamRecord._make, reader): #creates a namedtuple object of time priceStreamRecord for each row in the csv
-            yield row
+            yield parse_price_data(row)
 
 
 def parse_schema(path="price_schema.avsc"):
@@ -34,8 +38,6 @@ def serialize_records(records, avro_output="zrx_test.avro"):
     with open(avro_output, 'wb') as out:
         writer = DataFileWriter(out, DatumWriter(), schema)
         for record in records:
-            record = dict((f, getattr(record, f)) for f in record._fields)
-            print(record)
             writer.append(record)
 
 if __name__ == "__main__":
