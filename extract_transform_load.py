@@ -26,4 +26,5 @@ if __name__ == "__main__":
     timestamp_definition = price_pipeline()
     list_of_coins = ['BTC','ETH','LTC','BCH','ETC','ZEC','MKR','DAI','REP','BAT','BNB','ZRX']
     for coin in list_of_coins:
-        extract_transform_load.etl(coin,1546304461)
+        max_timestamp = timestamp_definition.timestamp_max_switcher(coin)
+        extract_transform_load.etl(coin, int(max_timestamp))
