@@ -68,11 +68,8 @@ class price_pipeline():
             earliest_timestamp = price_data[price_data['pair'] == str(coin) + '/USD'].sort_values(by='time')['time'].reset_index(drop=True)[0]
            # endTime = time()
             #logging.info('Request used within while loop time: ' + (endTime-startTime) + ' seconds')
-        price_data.to_csv(coin + '_test.csv',index=False )
+        price_data.to_csv(coin + '.csv',index=False )
         return price_data
-
-    #function to transform data into avro and parquet
-
 
 
         #function to load data onto an S3 bucket
