@@ -18,9 +18,9 @@ class extract_transform_load():
         file_name = test_extract.extract_historical_data(coin, timestamp)
         test_transform = transform_data()
         test_transform.serialize_records(test_transform.read_price_data(file_name), coin)
-        #s3 = boto3.resource('s3')
-        #bucket_name = 'test-erc20-ta'
-        #s3.meta.client.upload_file(coin+'.avro', bucket_name, coin.lower() + '/' + coin.lower()+ '.avro')
+        s3 = boto3.resource('s3')
+        bucket_name = 'test-erc20-ta'
+        s3.meta.client.upload_file(coin+'.avro', bucket_name, coin.lower() + '/' + coin.lower()+ '.avro')
 
 
 if __name__ == "__main__":

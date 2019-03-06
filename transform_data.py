@@ -50,9 +50,4 @@ class transform_data():
             for record in records:
                 writer.append(record)
 
-    @staticmethod
-    def load_data():
-        s3 = boto3.resource('s3')
-        bucket_name = 'test-erc20-ta'
-        s3.meta.client.upload_file('ZRX.avro', bucket_name, 'zrx/zrx.avro')
 
