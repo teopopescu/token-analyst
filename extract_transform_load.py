@@ -2,6 +2,7 @@ from price_pipeline import price_pipeline
 from transform_data import transform_data
 import boto3
 
+#This class contains code for extracting historical data for 14 cryptocurrency pairs on an hourly basis.
 
 class extract_transform_load():
 

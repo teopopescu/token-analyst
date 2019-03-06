@@ -10,14 +10,13 @@ source venv/bin/activate
 pip install -r requirements.txt
 ```
 
-To run tests execute
+To run the ETL, run
 ```
-test.py
+extract_transform_load.py
 
 ```
 
 Further commands to be added below for testing, building Docker image and releasing image to Docker
 ```
-
 
 ```
