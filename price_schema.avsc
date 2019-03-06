@@ -1,0 +1,39 @@
+{
+   "namespace": "io.tokenanalyst.pricestream",
+   "name": "priceStream",
+   "type": "record",
+   "fields" : [
+     {
+       "name" : "close",
+       "type" : "float"
+     },
+     {
+       "name" : "high",
+       "type" : "float"
+     },
+     {
+       "name" : "low",
+       "type" : "float"
+     },
+     {
+       "name" : "open",
+       "type" : "float"
+     },
+     {
+       "name" : "time",
+       "type" : "int"
+     },
+     {
+       "name" : "volumefrom",
+       "type" : "float"
+     },
+     {
+       "name" : "volumeto",
+       "type" : "float"
+     },
+       {
+       "name" : "pair",
+       "type" : "string"
+     }
+    ]
+}

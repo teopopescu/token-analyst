@@ -8,3 +8,4 @@ wheel==0.24.0
 pytest==3.10.0
 numpy==1.16.2
 pandas==0.24.1
+avro_json_serializer==1.0.1

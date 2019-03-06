@@ -5,6 +5,7 @@ import json
 import logging
 import time
 
+
 class price_pipeline():
 
     #function used for setting the max timestamp for each coin
@@ -67,12 +68,10 @@ class price_pipeline():
             earliest_timestamp = price_data[price_data['pair'] == str(coin) + '/USD'].sort_values(by='time')['time'].reset_index(drop=True)[0]
            # endTime = time()
             #logging.info('Request used within while loop time: ' + (endTime-startTime) + ' seconds')
-        price_data.to_csv(coin + '_test.csv')
+        price_data.to_csv(coin + '_test.csv',index=False )
         return price_data
 
-        #function to transform data into avro and parquet
-        #def transform_data(coin):
-         #   data = pd.read_csv(coin + '_test.csv')
+    #function to transform data into avro and parquet
 
 
 

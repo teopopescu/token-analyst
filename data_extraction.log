@@ -1,0 +1,16 @@
+DEBUG:urllib3.connectionpool:Starting new HTTPS connection (1): min-api.cryptocompare.com:443
+DEBUG:urllib3.connectionpool:https://min-api.cryptocompare.com:443 "GET /data/histohour?fsym=ZRX&tsym=USD&limit=10&api_key=1bd67a824981c5111dac94c7beca755ac6f3015ba9b60ccaa610dd700561b142 HTTP/1.1" 200 None
+DEBUG:urllib3.connectionpool:Starting new HTTPS connection (1): min-api.cryptocompare.com:443
+DEBUG:urllib3.connectionpool:https://min-api.cryptocompare.com:443 "GET /data/histohour?fsym=ZRX&tsym=USD&limit=2000&toTs=1551772800&api_key=1bd67a824981c5111dac94c7beca755ac6f3015ba9b60ccaa610dd700561b142 HTTP/1.1" 200 None
+DEBUG:urllib3.connectionpool:Starting new HTTPS connection (1): min-api.cryptocompare.com:443
+DEBUG:urllib3.connectionpool:https://min-api.cryptocompare.com:443 "GET /data/histohour?fsym=ZRX&tsym=USD&limit=2000&toTs=1544572800&api_key=1bd67a824981c5111dac94c7beca755ac6f3015ba9b60ccaa610dd700561b142 HTTP/1.1" 200 None
+DEBUG:urllib3.connectionpool:Starting new HTTPS connection (1): min-api.cryptocompare.com:443
+DEBUG:urllib3.connectionpool:https://min-api.cryptocompare.com:443 "GET /data/histohour?fsym=ZRX&tsym=USD&limit=2000&toTs=1537372800&api_key=1bd67a824981c5111dac94c7beca755ac6f3015ba9b60ccaa610dd700561b142 HTTP/1.1" 200 None
+DEBUG:urllib3.connectionpool:Starting new HTTPS connection (1): min-api.cryptocompare.com:443
+DEBUG:urllib3.connectionpool:https://min-api.cryptocompare.com:443 "GET /data/histohour?fsym=ZRX&tsym=USD&limit=2000&toTs=1530172800&api_key=1bd67a824981c5111dac94c7beca755ac6f3015ba9b60ccaa610dd700561b142 HTTP/1.1" 200 None
+DEBUG:urllib3.connectionpool:Starting new HTTPS connection (1): min-api.cryptocompare.com:443
+DEBUG:urllib3.connectionpool:https://min-api.cryptocompare.com:443 "GET /data/histohour?fsym=ZRX&tsym=USD&limit=2000&toTs=1522972800&api_key=1bd67a824981c5111dac94c7beca755ac6f3015ba9b60ccaa610dd700561b142 HTTP/1.1" 200 None
+DEBUG:urllib3.connectionpool:Starting new HTTPS connection (1): min-api.cryptocompare.com:443
+DEBUG:urllib3.connectionpool:https://min-api.cryptocompare.com:443 "GET /data/histohour?fsym=ZRX&tsym=USD&limit=2000&toTs=1515772800&api_key=1bd67a824981c5111dac94c7beca755ac6f3015ba9b60ccaa610dd700561b142 HTTP/1.1" 200 None
+DEBUG:urllib3.connectionpool:Starting new HTTPS connection (1): min-api.cryptocompare.com:443
+DEBUG:urllib3.connectionpool:https://min-api.cryptocompare.com:443 "GET /data/histohour?fsym=ZRX&tsym=USD&limit=2000&toTs=1508572800&api_key=1bd67a824981c5111dac94c7beca755ac6f3015ba9b60ccaa610dd700561b142 HTTP/1.1" 200 None
