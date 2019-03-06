@@ -3,6 +3,8 @@ from avro.datafile import DataFileReader, DataFileWriter
 from avro.io import DatumReader, DatumWriter
 import csv
 from collections import namedtuple
+from datetime import datetime, timedelta
+import time
 
 class transform_data():
 
@@ -39,12 +41,15 @@ class transform_data():
             return avro.schema.Parse(schema.read())
 
     @staticmethod
-    def serialize_records(records,coin,avro_output=None):
-        if avro_output==None:
+    def serialize_records(records,coin,avro_output=None,historical=False):
+        if avro_output==None and historical==True:
             avro_output=str(coin) + ".avro"
+        else:
+            last_hour_date_time = datetime.now() - timedelta(hours=1)
+            unixtime = time.mktime(last_hour_date_time.timetuple())
+            avro_output= str(unixtime)+"-"+str(coin)
         transformer = transform_data()
         schema = transformer.parse_schema()
-        #avro_output=str(coin) + ".avro"
         with open(avro_output, 'wb') as out:
             writer = DataFileWriter(out, DatumWriter(), schema)
             for record in records:

@@ -9,6 +9,7 @@ import time
 class price_pipeline():
 
     #function used for setting the max timestamp for each coin
+    #
     '''
     def timestamp_max_switcher(x):
         return {
@@ -45,42 +46,51 @@ class price_pipeline():
     logging.basicConfig(filename='data_extraction.log',level=logging.DEBUG)
     
     #function to extract historical data for coin
-    def extract_historical_data(self,coin,requested_timestamp):
+    def extract_historical_data(self,coin,requested_timestamp,historical=False):
         api_key="1bd67a824981c5111dac94c7beca755ac6f3015ba9b60ccaa610dd700561b142"
-
-
-        url= "https://min-api.cryptocompare.com/data/histohour?fsym="+ coin + "&tsym=USD&limit=10" + "&api_key="+api_key
-
-        #Setting up 2 DataFrames, one for storing all requested data, one for storing current iteration data (2000 hours)
+        url= "https://min-api.cryptocompare.com/data/histohour?fsym="+ coin + "&tsym=USD&limit=1" + "&api_key="+api_key
         price_data = pd.DataFrame()
-        new_price_data=pd.DataFrame()
         r = requests.get(url)
         response = r.json()
         price_data = price_data.append(response['Data'])
-        price_data['pair']=coin+'/USD'
-        #max_timestamp = timestamp_max_switcher(coin)
-        #max_timestamp represents the earliest point we want to get data for from the current timestamp on a historical basis
-        max_timestamp = requested_timestamp
-
-        #This conditional expression sets the timestamp used within the API request as the earliest timestamp we stored. From this point onwards, 2,000 hours are retrieved  historically.
-        if not price_data[price_data['pair']==coin+'/USD'].empty:
-            earliest_timestamp = price_data[price_data['pair']==str(coin)+'/USD'].sort_values(by='time')['time'].reset_index(drop=True)[0]
-            url= "https://min-api.cryptocompare.com/data/histohour?fsym="+ coin + "&tsym=USD&limit=2000&toTs=" + str(earliest_timestamp)  + "&api_key="+api_key
-        else:
-            url= "https://min-api.cryptocompare.com/data/histohour?fsym="+ coin + "&tsym=USD&limit=2000" + "&api_key="+api_key
-        while earliest_timestamp > max_timestamp:
-            url= "https://min-api.cryptocompare.com/data/histohour?fsym="+ coin + "&tsym=USD&limit=2000&toTs=" + str(earliest_timestamp)  + "&api_key="+api_key
+        price_data['pair'] = coin + '/USD'
+        pd.DataFrame(price_data.iloc[1, :]).to_csv(str(price_data.iloc[1, :][4]) + "-" + str(coin)+".csv",index=False)
+        if historical==True:
+            #Setting up 2 DataFrames, one for storing all requested data, one for storing current iteration data (2000 hours)
+            new_price_data=pd.DataFrame()
             r = requests.get(url)
             response = r.json()
-            new_price_data = new_price_data.append(response['Data'])
-            new_price_data['pair']=coin+'/USD'
-            price_data = pd.concat([price_data,new_price_data])
-            new_price_data = pd.DataFrame()
-            price_data = price_data.reset_index(drop=True)
-            price_data = price_data.sort_values(by='time',ascending='True')
-            earliest_timestamp = price_data[price_data['pair'] == str(coin) + '/USD'].sort_values(by='time')['time'].reset_index(drop=True)[0]
-        price_data.to_csv(coin + '.csv',index=False )
-        return coin + '.csv'
+            price_data = price_data.append(response['Data'])
+            price_data['pair']=coin+'/USD'
+            #max_timestamp = timestamp_max_switcher(coin)
+            #max_timestamp represents the earliest point we want to get data for from the current timestamp on a historical basis
+            max_timestamp = requested_timestamp
+
+            #This conditional expression sets the timestamp used within the API request as the earliest timestamp we stored. From this point onwards, 2,000 hours are retrieved  historically.
+            if not price_data[price_data['pair']==coin+'/USD'].empty:
+                earliest_timestamp = price_data[price_data['pair']==str(coin)+'/USD'].sort_values(by='time')['time'].reset_index(drop=True)[0]
+                url= "https://min-api.cryptocompare.com/data/histohour?fsym="+ coin + "&tsym=USD&limit=2000&toTs=" + str(earliest_timestamp)  + "&api_key="+api_key
+            else:
+                url= "https://min-api.cryptocompare.com/data/histohour?fsym="+ coin + "&tsym=USD&limit=2000" + "&api_key="+api_key
+            while earliest_timestamp > max_timestamp:
+                url= "https://min-api.cryptocompare.com/data/histohour?fsym="+ coin + "&tsym=USD&limit=2000&toTs=" + str(earliest_timestamp)  + "&api_key="+api_key
+                r = requests.get(url)
+                response = r.json()
+                new_price_data = new_price_data.append(response['Data'])
+                new_price_data['pair']=coin+'/USD'
+                price_data = pd.concat([price_data,new_price_data])
+                new_price_data = pd.DataFrame()
+                price_data = price_data.reset_index(drop=True)
+                price_data = price_data.sort_values(by='time',ascending='True')
+                earliest_timestamp = price_data[price_data['pair'] == str(coin) + '/USD'].sort_values(by='time')['time'].reset_index(drop=True)[0]
+            price_data.to_csv(coin + '.csv',index=False )
+            return coin + '.csv'
+        else:
+            r = requests.get(url)
+            response = r.json()
+            price_data = price_data.append(response['Data'])
+            price_data['pair'] = coin + '/USD'
+            return str(price_data.iloc[1, :][4]) + "-" + str(coin)+".csv"
 
 
 
