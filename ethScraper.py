@@ -42,7 +42,7 @@ class ethScraper():
         etherscan_data['Type'] = 'Account'
         return etherscan_data
 
-if __name__ == "__main__":
+if __name__  ==  "__main__":
     classification = ethScraper.extract_classifications()
     ethScraper.extract_accounts_data(classification[0]).to_csv('accounts_data.csv', index=False)
     with open('accounts_data.csv', 'a') as f:
