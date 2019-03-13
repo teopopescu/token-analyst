@@ -47,4 +47,8 @@ if __name__  ==  "__main__":
     ethScraper.extract_accounts_data(classification[0]).to_csv('accounts_data.csv', index=False)
     with open('accounts_data.csv', 'a') as f:
         for item in classification[1:]:
-            ethScraper.extract_accounts_data(item).to_csv(f, header=False)
+            extracted_data = ethScraper.extract_accounts_data(item)
+            if extracted_data.empty:
+                next(item, None)
+            else:
+                extracted_data.to_csv(f, header=False)
