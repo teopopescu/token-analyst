@@ -2,3 +2,4 @@ numpy==1.16.2
 pandas==0.24.1
 requests==2.20.0
 beautifulsoup4
+ens==0.6.1
